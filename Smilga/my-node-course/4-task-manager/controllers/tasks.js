@@ -5,15 +5,22 @@ const getAllTasks = (req, res) => {
 };
 
 const createTask = async (req, res) => {
-  const task = await Task.create(req.body);
-  return res.status(201).json({ task });
+  try {
+    const task = await Task.create(req.body);
+    return res.status(201).json({ task });
+  } catch (error) {
+    res.status(500).json({ msg: error });
+  }
 };
+
 const getTask = (req, res) => {
   return res.json({ id: req.params.id });
 };
+
 const updateTask = (req, res) => {
   return res.send("update task");
 };
+
 const deleteTask = (req, res) => {
   return res.send("delete task");
 };
